@@ -1,11 +1,10 @@
 # ompweb
 
-[![npm version](https://img.shields.io/npm/v/@kahme247/ompweb.svg?logo=npm&color=e05d44)](https://www.npmjs.com/package/@kahme247/ompweb)
-[![node version](https://img.shields.io/node/v/@kahme247/ompweb.svg?logo=node.js&color=44cc11)](https://nodejs.org)
-[![license](https://img.shields.io/github/license/kahme247/ompweb.svg?color=44cc11)](./LICENSE)
-[![npm downloads](https://img.shields.io/npm/dm/@kahme247/ompweb.svg?color=44cc11)](https://www.npmjs.com/package/@kahme247/ompweb)
-[![GitHub stars](https://img.shields.io/github/stars/kahme247/ompweb.svg?logo=github)](https://github.com/kahme247/ompweb/stargazers)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/kahme247/ompweb/pulls)
+[![release](https://img.shields.io/github/v/release/todouu/ompweb?logo=github&color=e05d44)](https://github.com/todouu/ompweb/releases/latest)
+[![node version](https://img.shields.io/badge/node-%3E%3D24-44cc11?logo=node.js)](https://nodejs.org)
+[![license](https://img.shields.io/github/license/todouu/ompweb.svg?color=44cc11)](./LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/todouu/ompweb.svg?logo=github)](https://github.com/todouu/ompweb/stargazers)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/todouu/ompweb/pulls)
 
 [English](./README.md) | [简体中文](./README.zh-CN.md) | [日本語](./README.ja.md)
 
@@ -37,18 +36,14 @@
 
 ## クイックスタート
 
-**インストールせずに直接実行:**
+**最新の GitHub Release からグローバルにインストール:**
 
 ```bash
-npx @kahme247/ompweb@latest
-```
-
-**またはグローバルにインストール:**
-
-```bash
-npm install -g @kahme247/ompweb
+npm install -g https://github.com/todouu/ompweb/releases/latest/download/ompweb.tgz
 ompweb
 ```
+
+更新するには同じインストールコマンドを再実行します。
 
 ブラウザで [http://127.0.0.1:30177](http://127.0.0.1:30177) を開きます。
 
@@ -135,7 +130,7 @@ Linux トレイ、Windows サービス）はインストール時に `OMP_WEB_PA
 ## 開発
 
 ```bash
-git clone https://github.com/kahme247/ompweb.git
+git clone https://github.com/todouu/ompweb.git
 cd ompweb
 npm install
 npm run dev

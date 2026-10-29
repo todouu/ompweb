@@ -1,0 +1,53 @@
+name: Release
+
+# Build the package on a version tag and attach it to a GitHub Release.
+# Install from the release asset:
+#   npm install -g https://github.com/<owner>/<repo>/releases/latest/download/ompweb.tgz
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - name: Verify tag matches package version
+        run: |
+          VERSION="$(node -p 'require("./package.json").version')"
+          test "$GITHUB_REF_NAME" = "v$VERSION"
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+      - run: npm test
+
+      - name: Pack (prepack runs the production build)
+        run: |
+          mkdir -p dist
+          npm pack --pack-destination dist
+          cp dist/*.tgz dist/ompweb.tgz
+          ls -l dist
+
+      - name: Create or update GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" dist/ompweb.tgz --clobber
+          else
+            node bin/generate-release-notes.js --tag "$TAG" --output release-notes.md
+            gh release create "$TAG" dist/ompweb.tgz --verify-tag --title "$TAG" --notes-file release-notes.md
+          fi

@@ -1,11 +1,10 @@
 # ompweb
 
-[![npm version](https://img.shields.io/npm/v/@kahme247/ompweb.svg?logo=npm&color=e05d44)](https://www.npmjs.com/package/@kahme247/ompweb)
-[![node version](https://img.shields.io/node/v/@kahme247/ompweb.svg?logo=node.js&color=44cc11)](https://nodejs.org)
-[![license](https://img.shields.io/github/license/kahme247/ompweb.svg?color=44cc11)](./LICENSE)
-[![npm downloads](https://img.shields.io/npm/dm/@kahme247/ompweb.svg?color=44cc11)](https://www.npmjs.com/package/@kahme247/ompweb)
-[![GitHub stars](https://img.shields.io/github/stars/kahme247/ompweb.svg?logo=github)](https://github.com/kahme247/ompweb/stargazers)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/kahme247/ompweb/pulls)
+[![release](https://img.shields.io/github/v/release/todouu/ompweb?logo=github&color=e05d44)](https://github.com/todouu/ompweb/releases/latest)
+[![node version](https://img.shields.io/badge/node-%3E%3D24-44cc11?logo=node.js)](https://nodejs.org)
+[![license](https://img.shields.io/github/license/todouu/ompweb.svg?color=44cc11)](./LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/todouu/ompweb.svg?logo=github)](https://github.com/todouu/ompweb/stargazers)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/todouu/ompweb/pulls)
 
 [English](./README.md) | [简体中文](./README.zh-CN.md) | [日本語](./README.ja.md)
 
@@ -92,22 +91,26 @@ frames (omp 18.3.1 or later).
 
 ## Quick Start
 
-**Run directly without installing:**
+**Install from the latest GitHub Release:**
 
 ```bash
-npx @kahme247/ompweb@latest
+npm install -g https://github.com/todouu/ompweb/releases/latest/download/ompweb.tgz
+ompweb
+```
+
+To pin a version, use that release's asset instead:
+`npm install -g https://github.com/todouu/ompweb/releases/download/v0.6.0/ompweb.tgz`.
+To update, run the same install command again.
+
+**Run without installing globally:**
+
+```bash
+npx --yes https://github.com/todouu/ompweb/releases/latest/download/ompweb.tgz
 ```
 
 or
 ```bash
-nix run github:kahme247/ompweb
-```
-
-**Or install globally:**
-
-```bash
-npm install -g @kahme247/ompweb
-ompweb
+nix run github:todouu/ompweb
 ```
 
 Open [http://127.0.0.1:30177](http://127.0.0.1:30177) in your browser.
@@ -193,25 +196,28 @@ Shortcuts are created on the Desktop and Start Menu. The service restarts automa
 Install ompweb as a launchd user agent that starts at login and restarts on crash:
 
 ```bash
-npx --yes @kahme247/ompweb@latest ompweb-launchd install
+ompweb-launchd install
 ```
 
 Manage it with:
 
 ```bash
-npx --yes @kahme247/ompweb@latest ompweb-launchd status      # Show service state
-npx --yes @kahme247/ompweb@latest ompweb-launchd uninstall   # Stop and remove
+ompweb-launchd status      # Show service state
+ompweb-launchd uninstall   # Stop and remove
 ```
 
-The service runs `npx --yes @kahme247/ompweb@latest`; pass a package spec to pin a
-version, e.g. `ompweb-launchd install @kahme247/ompweb@0.3.6`. All
+By default the service runs `npx --yes @kahme247/ompweb@latest`, which is the
+upstream npm package. To run this fork's release instead, pass its tarball URL as
+the package spec, e.g.
+`ompweb-launchd install https://github.com/todouu/ompweb/releases/latest/download/ompweb.tgz`
+(or pin a release with `.../releases/download/v0.6.0/ompweb.tgz`). All
 [environment variables](#environment-variables) are read at install time and baked
 into the plist, plus `OMP_WEB_PKG` (package spec, same as the positional argument).
 As a service, the browser is **not** auto-opened by default — install with
 `OMP_WEB_NO_OPEN=0` to restore that.
 
 ```bash
-OMP_WEB_PASSWORD=secret npx --yes @kahme247/ompweb@latest ompweb-launchd install
+OMP_WEB_PASSWORD=secret ompweb-launchd install
 ```
 
 `OMP_WEB_PASSWORD` is hashed at install time; the plist holds the hash, never
@@ -233,18 +239,18 @@ Install ompweb as a systemd **user** service that starts at login and restarts
 on crash:
 
 ```bash
-npx --yes --package=@kahme247/ompweb@latest ompweb-systemd install
+ompweb-systemd install
 ```
 The installer creates `~/.omp/agent/web-service.env` automatically with mode
-`600`; no manual file creation is required. The explicit `--package` form makes
-`npx` run the systemd executable from the selected package.
+`600`; no manual file creation is required. It uses the `ompweb-systemd`
+command from the globally installed release.
 
 To bind the service to all IPv4 interfaces for LAN access, set a password while
 installing:
 
 ```bash
 OMP_WEB_HOSTNAME=0.0.0.0 OMP_WEB_PASSWORD='change-me' \
-  npx --yes --package=@kahme247/ompweb@latest ompweb-systemd install
+  ompweb-systemd install
 ```
 
 The password is hashed before it is written to `web-service.env`.
@@ -252,9 +258,9 @@ The password is hashed before it is written to `web-service.env`.
 Manage it with:
 
 ```bash
-npx --yes --package=@kahme247/ompweb@latest ompweb-systemd status    # Show service state
-npx --yes --package=@kahme247/ompweb@latest ompweb-systemd restart   # start / stop / restart
-npx --yes --package=@kahme247/ompweb@latest ompweb-systemd uninstall # Stop and remove
+ompweb-systemd status    # Show service state
+ompweb-systemd restart   # start / stop / restart
+ompweb-systemd uninstall # Stop and remove
 ```
 
 The service runs the locally installed `ompweb` binary resolved at install time
@@ -286,9 +292,9 @@ view logs, expose the web UI to the network, change the port, set the web
 password, toggle autostart, and quit the tray.
 
 ```bash
-npx --yes @kahme247/ompweb@latest ompweb-tray --install      # Icons + autostart + start tray
-npx --yes @kahme247/ompweb@latest ompweb-tray --status       # Tray and service status
-npx --yes @kahme247/ompweb@latest ompweb-tray --uninstall    # Remove autostart, stop tray
+ompweb-tray --install      # Icons + autostart + start tray
+ompweb-tray --status       # Tray and service status
+ompweb-tray --uninstall    # Remove autostart, stop tray
 ```
 
 **Expose to Network** rebinds the service from `127.0.0.1` to `0.0.0.0` so the
@@ -455,7 +461,7 @@ addresses you list in `set_real_ip_from`:
 ## Development
 
 ```bash
-git clone https://github.com/kahme247/ompweb.git
+git clone https://github.com/todouu/ompweb.git
 cd ompweb
 npm install
 npm run dev

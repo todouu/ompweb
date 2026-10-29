@@ -1,11 +1,10 @@
 # ompweb
 
-[![npm version](https://img.shields.io/npm/v/@kahme247/ompweb.svg?logo=npm&color=e05d44)](https://www.npmjs.com/package/@kahme247/ompweb)
-[![node version](https://img.shields.io/node/v/@kahme247/ompweb.svg?logo=node.js&color=44cc11)](https://nodejs.org)
-[![license](https://img.shields.io/github/license/kahme247/ompweb.svg?color=44cc11)](./LICENSE)
-[![npm downloads](https://img.shields.io/npm/dm/@kahme247/ompweb.svg?color=44cc11)](https://www.npmjs.com/package/@kahme247/ompweb)
-[![GitHub stars](https://img.shields.io/github/stars/kahme247/ompweb.svg?logo=github)](https://github.com/kahme247/ompweb/stargazers)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/kahme247/ompweb/pulls)
+[![release](https://img.shields.io/github/v/release/todouu/ompweb?logo=github&color=e05d44)](https://github.com/todouu/ompweb/releases/latest)
+[![node version](https://img.shields.io/badge/node-%3E%3D24-44cc11?logo=node.js)](https://nodejs.org)
+[![license](https://img.shields.io/github/license/todouu/ompweb.svg?color=44cc11)](./LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/todouu/ompweb.svg?logo=github)](https://github.com/todouu/ompweb/stargazers)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/todouu/ompweb/pulls)
 
 [English](./README.md) | [简体中文](./README.zh-CN.md) | [日本語](./README.ja.md)
 
@@ -37,18 +36,14 @@
 
 ## 快速开始
 
-**免安装直接运行：**
+**从最新的 GitHub Release 全局安装：**
 
 ```bash
-npx @kahme247/ompweb@latest
-```
-
-**或全局安装：**
-
-```bash
-npm install -g @kahme247/ompweb
+npm install -g https://github.com/todouu/ompweb/releases/latest/download/ompweb.tgz
 ompweb
 ```
+
+更新时重新执行同一条安装命令即可。
 
 在浏览器中打开 [http://127.0.0.1:30177](http://127.0.0.1:30177)。
 
@@ -128,7 +123,7 @@ Windows 服务）仍在安装时接受 `OMP_WEB_PASSWORD`，但在写入配置�
 ## 本地开发
 
 ```bash
-git clone https://github.com/kahme247/ompweb.git
+git clone https://github.com/todouu/ompweb.git
 cd ompweb
 npm install
 npm run dev
